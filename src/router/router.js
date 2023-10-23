@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Login from '../components/Login.vue';
-import Register from '../components/Register.vue';/
+import Register from '../components/Register.vue';
 import Home from '../components/Home.vue';
 import ProductSingle from "../components/ProductSingle.vue";
 import Category from "../components/Category.vue";
 import Shop from "../components/Shop.vue";
 import Cart from "../components/Cart.vue";
 import Checkout from "../components/Checkout.vue";
-//import Page from "../components/Page.vue";
+import Account from "../components/dashboard/Account.vue";
+import Profile from "../components/dashboard/Profile.vue";
+import Wishlist from "../components/dashboard/Wishlist.vue";
 
 const routes = [
     {
@@ -25,24 +27,29 @@ const routes = [
     },
     {
         path: '/cart', component: Cart, name: 'cart', meta: {
-            requiresAuth: true
+            // requiresAuth: true
         }
     },
     {
         path: '/checkout', component: Checkout, name: 'checkout', meta: {
-            requiresAuth: true
+            // requiresAuth: true
         }
     },    
     {
-        path: '/dashboard', component: Dashboard, 'name': 'dashboard',meta: {
-            requiresAuth: true
+        path: '/dashboard/account', component: Account, name: 'account', meta: {
+            // requiresAuth: true
         }
     },    
     {
-        path: '/dashboard', component: Dashboard, 'name': 'dashboard',meta: {
-            requiresAuth: true
+        path: '/dashboard/profile', component: Profile, name: 'profile', meta: {
+            // requiresAuth: true
         }
-    },
+    },    
+    {
+        path: '/dashboard/wishlist', component: Wishlist, name: 'wishlist', meta: {
+            // requiresAuth: true
+        }
+    },    
     {
         path: '/login', component: Login, 'name': 'login'
     },

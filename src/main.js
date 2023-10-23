@@ -10,14 +10,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faShoppingCart, faBars, faMagnifyingGlass, faHouse, faChevronRight, faGripVertical, faList, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faHeart,farHeart, faShoppingCart, faBars, faMagnifyingGlass)
+library.add(faHeart,farHeart, faShoppingCart, faBars, faMagnifyingGlass, faHouse, faChevronRight, faGripVertical, faList, faUser)
 
 
 createApp(App)
