@@ -18,15 +18,15 @@ import {cart} from '../store/cart'
                 <a href="#" @click="wishlist.toggleWishlist(product)"
                     class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                     title="add to wishlist">
-                    <!-- <font-awesome-icon v-if="wishlist.isWishlist(product)" :icon="['fas', 'heart']" /> -->
-                    <font-awesome-icon :icon="['far', 'heart']" />
+                    <font-awesome-icon v-if="wishlist.isWishListed(product)" :icon="['fas', 'heart']" />
+                    <font-awesome-icon v-else :icon="['far', 'heart']" />
                 </a>
             </div>
         </div>
         <div class="pt-4 pb-3 px-4">
-            <a href="#">
+            <router-link :to="{ name: 'product-single', params: { slug: product.slug }}">
                 <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ product.title }}</h4>
-            </a>
+            </router-link>
             <div class="flex items-baseline mb-1 space-x-2">
                 <template v-if="product.reduced_price != null">
                     <p class="text-xl text-primary font-semibold">$ {{ product.reduced_price }}</p>

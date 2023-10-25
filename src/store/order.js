@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import router from '../router/router'
 import { authStore } from './authStore'
 import { basicStore } from './basic'
 import { cart } from './cart'
@@ -79,12 +80,12 @@ const order = reactive({
                 },
                 body: JSON.stringify(payload)
             })
-            if(data.success===true){
+            let data = await response.json()
+            if(data.success==true){
                 this.errorMessage = {}
                 cart.emptyCart()
                 router.push('/dashboard/account')
             }else{
-                //console.log(data)
                 this.errorMessage = data.data
             }
             

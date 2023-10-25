@@ -47,27 +47,39 @@ const country = ref(user.country)
                 </div> -->
                 <div>
                     <label for="name" class="text-gray-600">Name</label>
-                    <input type="text" name="name" id="name" v-model="name" class="input-box">
+                    <input type="text" name="name" id="name" v-model="name" class="input-box"
+                            :class="order.errorMessage.name ? 'border-red-500' : ''">
+                    <span v-if="order.errorMessage.name" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.name[0] }}</span>
                 </div>
                 <div>
                     <label for="phone" class="text-gray-600">Phone number</label>
-                    <input type="text" name="phone" id="phone" v-model="phone" class="input-box">
+                    <input type="text" name="phone" id="phone" v-model="phone" class="input-box"
+                            :class="order.errorMessage.name ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.name" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.name[0] }}</span>
                 </div>
                 <div>
                     <label for="email" class="text-gray-600">Email address</label>
-                    <input type="email" name="email" id="email" v-model="email" class="input-box">
+                    <input type="email" name="email" id="email" v-model="email" class="input-box"
+                            :class="order.errorMessage.email ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.email" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.email[0] }}</span>
                 </div>
                 <div>
                     <label for="address" class="text-gray-600">Street address</label>
-                    <input type="text" name="address" id="address" v-model="address" class="input-box">
+                    <input type="text" name="address" id="address" v-model="address" class="input-box"
+                            :class="order.errorMessage.address ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.address" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.address[0] }}</span>
                 </div>
                 <div>
                     <label for="city" class="text-gray-600">City</label>
-                    <input type="text" name="city" id="city" v-model="city" class="input-box">
+                    <input type="text" name="city" id="city" v-model="city" class="input-box"
+                            :class="order.errorMessage.city ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.city" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.city[0] }}</span>
                 </div>
                 <div>
                     <label for="country" class="text-gray-600">Country/Region</label>
-                    <input type="text" name="country" id="country" v-model="country" class="input-box">
+                    <input type="text" name="country" id="country" v-model="country" class="input-box"
+                            :class="order.errorMessage.country ? 'border-red-500' : ''">
+                            <span v-if="order.errorMessage.country" class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">{{ order.errorMessage.country[0] }}</span>
                 </div>
             </div>
 

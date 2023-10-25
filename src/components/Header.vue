@@ -1,5 +1,6 @@
 <script setup>
 import { cart } from "../store/cart";
+import { wishlist } from "../store/wishlist";
 </script>
 <template>
     <header class="py-4 shadow-sm bg-white">
@@ -30,7 +31,7 @@ import { cart } from "../store/cart";
                     <div class="text-xs leading-3">Wishlist</div>
                     <div
                         class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        8</div>
+                        {{ wishlist.totalWishlistItems }}</div>
                 </router-link>
                 <router-link to="/cart" class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">

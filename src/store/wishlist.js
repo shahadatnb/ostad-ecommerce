@@ -1,9 +1,14 @@
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { authStore } from './authStore'
 import { basicStore } from './basic'
 const basic = basicStore
 const wishlist = reactive({
     items: [],
+    totalWishlistItems:computed(()=>{
+        let total = 0
+        total = wishlist.items.length
+        return total
+    }),
     isWishListed(product) {
         return this.items.includes(product.id)
     },
@@ -87,5 +92,7 @@ const wishlist = reactive({
 
 
 })
+
+wishlist.fetchWishlist()
 
 export { wishlist }
