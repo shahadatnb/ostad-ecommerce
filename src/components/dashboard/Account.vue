@@ -1,8 +1,18 @@
 <script setup>
 import Sidebar from './Sidebar.vue';
 import { authStore } from "../../store/authStore";
+import { basicStore } from "../../store/basic";
+import { ref,onBeforeMount } from 'vue';
+import axios from "axios";
 const auth = authStore.user.user
-
+const getOrders = ref([]);
+onBeforeMount(()=>{
+    const token = authStore.getUserToken()
+    axios.get(`${basicStore.serverUrl}/api/orders`, { headers: {"Authorization" : `Bearer ${token}`} })
+    .then(res => {
+        getOrders.value = res.data
+    });
+})
 </script>
 <template>
     <!-- breadcrumb -->
@@ -63,10 +73,59 @@ const auth = authStore.user.user
                     <p class="text-gray-800">20317</p>
                     <p class="text-gray-800">0811 8877 988</p>
                 </div>
-            </div> -->
+            </div> -->           
 
         </div>
         <!-- ./info -->
+
+        <div class="col-span-9">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+					<table class="min-w-full leading-normal">
+						<thead>
+							<tr>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Order ID
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Amount
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Order Date
+								</th>
+								<th
+									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Detail
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="order in getOrders" :key="order.id">
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">{{ order.id }}</p>
+								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">
+										${{ order.amount }}
+									</p>
+								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">
+                                        {{ order.created_at }}
+									</p>
+								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+
+        </div>
 
     </div>
     <!-- ./account wrapper -->
