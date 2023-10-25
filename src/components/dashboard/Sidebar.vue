@@ -1,3 +1,6 @@
+<script setup>
+import { authStore } from "../../store/authStore";
+</script>
 <template>
     <div class="col-span-3">
         <div class="px-4 py-3 shadow flex items-center gap-4">
@@ -7,10 +10,10 @@
             </div>
             <div class="flex-grow">
                 <p class="text-gray-600">Hello,</p>
-                <h4 class="text-gray-800 font-medium">John Doe</h4>
+                <h4 class="text-gray-800 font-medium">{{ authStore.user.user.name }}</h4>
             </div>
         </div>
-
+<!--
         <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
             <div class="space-y-1 pl-8">
                 <a href="#" class="block font-medium capitalize transition">
@@ -77,7 +80,7 @@
                     Logout
                 </a>
             </div>
-
         </div>
+        -->
     </div>
 </template>

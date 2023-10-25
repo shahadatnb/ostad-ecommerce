@@ -1,5 +1,13 @@
 <script setup>
+import { ref } from "vue";
 import Sidebar from './Sidebar.vue';
+import { authStore } from "../../store/authStore";
+const auth = authStore.userProfile
+const email = ref(auth.email)
+const name = ref(auth.name)
+const address = ref(auth.address)
+const phone = ref(auth.phone)
+const date_of_birth = ref(auth.date_of_birth)
 </script>
 <template>
     <!-- breadcrumb -->
@@ -30,17 +38,18 @@ import Sidebar from './Sidebar.vue';
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="first">First name</label>
-                        <input type="text" name="first" id="first" class="input-box">
+                        <input type="text" name="first" id="first" v-model="name" class="input-box">
                     </div>
                     <div>
-                        <label for="last">Last name</label>
-                        <input type="text" name="last" id="last" class="input-box">
+                        <label for="last">Address</label>
+                        <input type="text" name="last" id="last" v-model="address" class="input-box">
                     </div>
                 </div>
+                <!--
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="birthday">Birthday</label>
-                        <input type="date" name="birthday" id="birthday" class="input-box">
+                        <input type="text" name="birthday" id="birthday" v-model="date_of_birth" class="input-box">
                     </div>
                     <div>
                         <label for="gender">Gender</label>
@@ -50,20 +59,21 @@ import Sidebar from './Sidebar.vue';
                         </select>
                     </div>
                 </div>
+            -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="email">Email Address</label>
-                        <input type="email" name="email" id="email" class="input-box">
+                        <input type="email" name="email" id="email" v-model="email" class="input-box">
                     </div>
                     <div>
                         <label for="phone">Phone number</label>
-                        <input type="text" name="phone" id="phone" class="input-box">
+                        <input type="text" name="phone" id="phone" v-model="phone" class="input-box">
                     </div>
                 </div>
             </div>
 
             <div class="mt-4">
-                <button type="submit"
+                <button type="submit" @click="authStore.updateProfile(name, email, phone, address, date_of_birth)"
                     class="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">save
                     changes</button>
             </div>

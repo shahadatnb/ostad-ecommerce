@@ -1,3 +1,7 @@
+<script setup>
+import { authStore } from '../store/authStore';
+const auth = authStore 
+</script>
 <template>
     <nav class="bg-gray-800">
         <div class="container flex">
@@ -45,9 +49,12 @@
                     <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
                     <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
                 </div>
-                <div>
+                <div v-if="!auth.isAuthenticated">
                 <router-link to="/login" class="text-gray-200 hover:text-white transition mr-2">Login</router-link>
                 <router-link to="/register" class="text-gray-200 hover:text-white transition">Register</router-link>
+                </div>
+                <div v-else>
+                    <router-link to="#" @click="auth.logout" class="text-gray-200 hover:text-white transition">Logout</router-link>
                 </div>
             </div>
         </div>

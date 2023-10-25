@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
+import {authStore} from '../store/authStore';
 import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 import Home from '../components/Home.vue';
@@ -23,38 +23,49 @@ const routes = [
         path: '/category/:slug', component: Category, name: 'category-product', meta: { title: 'Category' }
     },
     {
-        path: '/shop', component: Shop, name: 'contact'
+        path: '/shop', component: Shop, name: 'contact', meta: {
+            title: 'Shop'
+        }
     },
     {
         path: '/cart', component: Cart, name: 'cart', meta: {
-            // requiresAuth: true
+            requiresAuth: true,
+            title: 'Cart'
         }
     },
     {
         path: '/checkout', component: Checkout, name: 'checkout', meta: {
-            // requiresAuth: true
+            requiresAuth: true,
+            title: 'Checkout'
         }
     },    
     {
         path: '/dashboard/account', component: Account, name: 'account', meta: {
-            // requiresAuth: true
+            requiresAuth: true,
+            title: 'Account'
         }
     },    
     {
         path: '/dashboard/profile', component: Profile, name: 'profile', meta: {
-            // requiresAuth: true
+            requiresAuth: true,
+            title: 'Profile'
         }
     },    
     {
         path: '/dashboard/wishlist', component: Wishlist, name: 'wishlist', meta: {
-            // requiresAuth: true
+            requiresAuth: true,
+            title: 'Wishlist'
         }
     },    
     {
-        path: '/login', component: Login, 'name': 'login'
+        path: '/login', component: Login, 'name': 'login', meta: {
+            title: 'Login'
+        }
     },
     {
-        path: '/register', component: Register, 'name': 'register'
+        path: '/register', component: Register, 'name': 'register', meta: {
+            title: 'Register'
+        }
     }
     
 ]
@@ -66,13 +77,12 @@ const router = createRouter({
 
 const DEFAULT_TITLE = 'Ecommerce';
 router.afterEach((to, from) => {
-    Vue.nextTick(() => {
-        document.title = to.meta.title || DEFAULT_TITLE;
-    });
+    const title = to.meta.title;
+    document.title = title ?? DEFAULT_TITLE;
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !autoStore.isAuthenticated) {
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
         next({ name: 'login' })
     } else {
         next()
