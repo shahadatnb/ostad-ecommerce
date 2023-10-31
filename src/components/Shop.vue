@@ -1,15 +1,20 @@
 <script setup>
-import Categories from './homepage/Categories.vue'
 import LoopProduct from './LoopProduct.vue';
 import {onBeforeMount,ref} from "vue";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
 import axios from "axios";
 const products = ref([])
+const categories = ref([])
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
         .then(res => {
             products.value = res.data.data
+        });
+
+    axios.get(`${basic.serverUrl}/api/categories`)
+        .then(res => {
+            categories.value = res.data.data
         });
 })
 </script>
@@ -197,34 +202,16 @@ onBeforeMount(()=>{
                 <div>
                     <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
                     <div class="space-y-2">
-                        <div class="flex items-center">
+                        <div v-for="category in categories" :key="category.id" class="flex items-center">
                             <input type="checkbox" name="cat-1" id="cat-1"
                                 class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Bedroom</label>
-                            <div class="ml-auto text-gray-600 text-sm">(15)</div>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" name="cat-2" id="cat-2"
-                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                            <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Sofa</label>
-                            <div class="ml-auto text-gray-600 text-sm">(9)</div>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" name="cat-3" id="cat-3"
-                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                            <label for="cat-3" class="text-gray-600 ml-3 cusror-pointer">Office</label>
-                            <div class="ml-auto text-gray-600 text-sm">(21)</div>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" name="cat-4" id="cat-4"
-                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                            <label for="cat-4" class="text-gray-600 ml-3 cusror-pointer">Outdoor</label>
-                            <div class="ml-auto text-gray-600 text-sm">(10)</div>
+                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">{{ category.title }}</label>
+                            <!-- <div class="ml-auto text-gray-600 text-sm">(15)</div> -->
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-4">
+                <!-- <div class="pt-4">
                     <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Brands</h3>
                     <div class="space-y-2">
                         <div class="flex items-center">
@@ -327,7 +314,7 @@ onBeforeMount(()=>{
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>

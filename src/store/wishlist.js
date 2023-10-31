@@ -1,6 +1,7 @@
 import { reactive, computed } from 'vue'
 import { authStore } from './authStore'
 import { basicStore } from './basic'
+import router from '../router/router'
 const basic = basicStore
 const wishlist = reactive({
     items: [],
@@ -45,6 +46,10 @@ const wishlist = reactive({
             product_id: product.id
         }
         const token = authStore.getUserToken()
+
+        if (!token) {
+            router.push('/login')
+        }
 
         if (!this.isWishListed(product)) {
             //add item to wishlist

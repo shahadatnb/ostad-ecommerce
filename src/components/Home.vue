@@ -27,7 +27,7 @@ onBeforeMount(()=>{
     
     <Feature />
 
-    <Categories />
+    <!-- <Categories /> -->
 
     <!-- new arrival -->
     <div class="container pb-16">

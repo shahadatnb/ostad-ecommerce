@@ -5,14 +5,11 @@ const auth = authStore
 <template>
     <nav class="bg-gray-800">
         <div class="container flex">
-            <div class="px-8 py-4 bg-primary md:flex items-center cursor-pointer relative group hidden">
+            <!-- <div class="px-8 py-4 bg-primary md:flex items-center cursor-pointer relative group hidden">
                 <span class="text-white">
-                    <!-- <i class="fa-solid fa-bars"></i> -->
                     <font-awesome-icon :icon="['fas', 'bars']" />
                 </span>
                 <span class="capitalize ml-2 text-white hidden">All Categories</span>
-
-                <!-- dropdown -->
                 <div
                     class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
                     <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
@@ -40,7 +37,7 @@ const auth = authStore
                         <span class="ml-6 text-gray-600 text-sm">Mattress</span>
                     </a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
                 <div class="flex items-center space-x-6 capitalize">
