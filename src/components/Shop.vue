@@ -1,11 +1,25 @@
 <script setup>
 import LoopProduct from './LoopProduct.vue';
-import {onBeforeMount,ref} from "vue";
+import {onBeforeMount,ref, reactive, computed} from "vue";
 import { basicStore } from "../store/basic";
 const basic = basicStore;
 import axios from "axios";
 const products = ref([])
 const categories = ref([])
+const selectedCategory = ref([])
+// products.value = computed(()=> {
+//     axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory}`)
+//         .then(res => {
+//             return res.data.data
+//         });
+// })
+computed(()=> {
+    axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory}`)
+        .then(res => {
+            products.value = res.data.data
+        });
+})
+
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
         .then(res => {
@@ -30,6 +44,7 @@ onBeforeMount(()=>{
             <font-awesome-icon icon="fa-solid fa-chevron-right" />
         </span>
         <p class="text-gray-600 font-medium">Shop</p>
+        <!-- {{ selectedCategory }} -->
     </div>
     <!-- ./breadcrumb -->
 
@@ -203,10 +218,10 @@ onBeforeMount(()=>{
                     <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
                     <div class="space-y-2">
                         <div v-for="category in categories" :key="category.id" class="flex items-center">
-                            <input type="checkbox" name="cat-1" id="cat-1"
-                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">{{ category.title }}</label>
-                            <!-- <div class="ml-auto text-gray-600 text-sm">(15)</div> -->
+                            <input type="checkbox" v-model="selectedCategory" :value="category.id" name="category" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <!-- <input @click="selectCategory(category)" type="checkbox" name="category" :id="'cat-'+category.id" class="text-primary focus:ring-0 rounded-sm cursor-pointer"> -->
+                            <label :for="'cat-'+category.id" class="text-gray-600 ml-3 cusror-pointer">{{ category.title }}</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{ category.prodcuctCount }})</div>
                         </div>
                     </div>
                 </div>
