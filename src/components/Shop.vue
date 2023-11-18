@@ -7,23 +7,28 @@ import axios from "axios";
 const products = ref([])
 const categories = ref([])
 const selectedCategory = ref([])
+const testProducts = reactive({
+    product: [],
+    categories: [],
+})
 // products.value = computed(()=> {
 //     axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory}`)
 //         .then(res => {
 //             return res.data.data
 //         });
 // })
-computed(()=> {
-    axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory}`)
+function fetchProducts(){
+    axios.get(`${basic.serverUrl}/api/latest-products?take=8&categories=${selectedCategory.value}`)
         .then(res => {
             products.value = res.data.data
         });
-})
+}
 
 onBeforeMount(()=>{
     axios.get(`${basic.serverUrl}/api/latest-products?take=8`)
         .then(res => {
             products.value = res.data.data
+            testProducts.data = res.data.data
         });
 
     axios.get(`${basic.serverUrl}/api/categories`)
@@ -218,7 +223,7 @@ onBeforeMount(()=>{
                     <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
                     <div class="space-y-2">
                         <div v-for="category in categories" :key="category.id" class="flex items-center">
-                            <input type="checkbox" v-model="selectedCategory" :value="category.id" name="category" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <input @change="fetchProducts" type="checkbox" v-model="selectedCategory" :value="category.id" name="category" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                             <!-- <input @click="selectCategory(category)" type="checkbox" name="category" :id="'cat-'+category.id" class="text-primary focus:ring-0 rounded-sm cursor-pointer"> -->
                             <label :for="'cat-'+category.id" class="text-gray-600 ml-3 cusror-pointer">{{ category.title }}</label>
                             <div class="ml-auto text-gray-600 text-sm">({{ category.prodcuctCount }})</div>
@@ -335,6 +340,7 @@ onBeforeMount(()=>{
         </div>
         <!-- products -->
         <div class="col-span-3">
+            {{ selectedCategory }}
             <div class="flex items-center mb-4">
                 <select name="sort" id="sort"
                     class="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
