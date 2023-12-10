@@ -5,7 +5,7 @@ import { authStore } from "../../store/authStore";
     <div class="col-span-3">
         <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
-                <img src="../assets/images/avatar.png" alt="profile"
+                <img src="#" alt="profile"
                     class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
             </div>
             <div class="flex-grow">
